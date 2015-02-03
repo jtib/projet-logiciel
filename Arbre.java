@@ -5,79 +5,82 @@ import java.util.Vector;
 public class Arbre<T> {
 
 	private T mot;
+	private Arbre<T> parent;
 	private Vector<Arbre<T>> enfants;
 
-	//Constructeur
+	//Constructeur pour un arbre-feuille
 	Arbre (T word){
 		this.mot = word;
+		this.parent = null;
 		this.enfants = new Vector<Arbre<T>>();
 	}
 
-	//Racine de l'arbre
-	public T racine(Arbre<T> arbre){
-		return arbre.mot;
+	//Etiquette de la racine de l'arbre
+	public T racine(){
+		return this.mot;
 	}
 
 	//L'arbre est-il une feuille ?
-	public boolean isLeaf(Arbre<T> arbre){
-		return arbre.enfants.isEmpty();		
+	public boolean isLeaf(){
+		return this.enfants.isEmpty();		
+	}
+	
+	//L'élément est-il racine de l'arbre ?
+	public boolean isRoot(){
+		return (this.parent == null);
 	}
 
 	//nième arbre fils
-	public Arbre<T> niemeFils(Arbre<T> arbre, int n){
-		if(n >= arbre.enfants.size()){
+	public Arbre<T> niemeFils(int n){
+		if(n >= this.enfants.size()){
 			return null;
 		}
 		else{
-			return arbre.enfants.get(n);
+			return this.enfants.get(n);
 		}
 	}
 
 	//échange deux fils
-	public Arbre<T> swapFils(Arbre<T> arbre, int m, int n){
-		if(n >= arbre.enfants.size() || m >= arbre.enfants.size()){
+	public Arbre<T> swapFils(int m, int n){
+		if(n >= this.enfants.size() || m >= this.enfants.size()){
 			return null;
 		}
 		else{
-			Arbre<T> t = arbre.enfants.get(m);
-			arbre.enfants.set(m, arbre.enfants.get(n));
-			arbre.enfants.set(n, t);
-			return arbre;
+			Arbre<T> t = this.enfants.get(m);
+			this.enfants.set(m, this.enfants.get(n));
+			this.enfants.set(n, t);
+			return this;
 		}
 	}
 
 	//nombre de feuilles de l'arbre
-	public int nfeuilles(Arbre<T> arbre){
-		if(isLeaf(arbre)){
+	public int nfeuilles(){
+		if(this.isLeaf()){
 			return 1;
 		}
 		else{
 			int sum = 0;
 			for(Arbre<T> t : arbre.enfants){
-				sum += nfeuilles(t);
+				sum += t.nfeuilles();
 			}
 			return sum;
 		}
 	}
 	
 	//Tous les enfants sont-ils des feuilles ?
-	public boolean isLastNode(Arbre<T> arbre){
+	public boolean isLastNode(){
 		boolean b = true;
 		int i = 0;
-		while(b && i < arbre.enfants.size()){
-			b = (isLeaf(arbre.enfants.get(i)));
+		while(b && i < this.enfants.size()){
+			b = (isLeaf(this.enfants.get(i)));
 			i++;
 		}
 		return b;
 	}
 
 	//ajoute une feuille à l'arbre
-	public void addFeuille(Arbre<T> arbre, T mot){
-		if(isLeaf(arbre) || isLastNode(arbre)){
-			Arbre<T> t = new Arbre<T>(mot);
-			arbre.enfants.add(t);
-		}
-		else addFeuille(arbre.enfants.lastElement(), mot);			
-		}
-		
+	public void addFeuille(T mot){
+		Arbre<T> t = new Arbre<T>(mot);
+		this.enfants.add(t);
 	}
+}
