@@ -46,9 +46,13 @@ public class Arbre<T> {
 			return null;
 		}
 		else{
-			Arbre<T> t = this.enfants.get(m);
+			Arbre<T> tm = this.enfants.get(m);
+			Arbre<T> parentM = tm.parent;
+			Arbre<T> parentN = this.enfants.get(n).parent;
 			this.enfants.set(m, this.enfants.get(n));
-			this.enfants.set(n, t);
+			this.enfants.get(m).parent = parentM;
+			this.enfants.set(n, tm);
+			this.enfants.get(n).parent = parentN;
 			return this;
 		}
 	}
@@ -81,6 +85,7 @@ public class Arbre<T> {
 	//ajoute une feuille à l'arbre
 	public void addFeuille(T mot){
 		Arbre<T> t = new Arbre<T>(mot);
+		t.parent = this;
 		this.enfants.add(t);
 	}
 }
