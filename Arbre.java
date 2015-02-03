@@ -64,7 +64,7 @@ public class Arbre<T> {
 		}
 		else{
 			int sum = 0;
-			for(Arbre<T> t : arbre.enfants){
+			for(Arbre<T> t : this.enfants){
 				sum += t.nfeuilles();
 			}
 			return sum;
@@ -76,7 +76,7 @@ public class Arbre<T> {
 		boolean b = true;
 		int i = 0;
 		while(b && i < this.enfants.size()){
-			b = (isLeaf(this.enfants.get(i)));
+			b = (this.enfants.get(i).isLeaf());
 			i++;
 		}
 		return b;
