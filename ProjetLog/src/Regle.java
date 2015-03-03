@@ -1,34 +1,45 @@
 import java.util.Vector;
 
-
 public class Regle {
-	
+
 	private Fait fact;
 	private Condition premise;
 	private int action;
-	
+
 	public Regle(Fait fait, Condition premisse, int numAction){
 		this.fact = fait;
 		this.premise = premisse;
 		this.action = numAction;
 	}
 	
-	/** Méthode pour établir la liste des numéros des actions à effectuer
+	public Fait getFait(){
+		return this.fact;
+	}
+	
+	public Condition getCondition(){
+		return this.premise;
+	}
+	
+	public int getAction(){
+		return this.action;
+	}
+
+	/** M√©thode pour √©tablir la liste des num√©ros des actions √† effectuer
 	 * 
-	 * @param rules Liste des règles à appliquer 
-	 * @param facts Liste des faits auxquels appliquer les règles
-	 * @return la liste des actions à effectuer (sous forme de numéros)
+	 * @param facts Liste des faits auxquels appliquer les r√®gles
+	 * @return la liste des actions √† effectuer (sous forme de num√©ros)
 	 */
-	public Vector<Integer> aEffectuer(Fait[] facts){
+	public Vector<Pair<Integer,Integer>> aEffectuer(Fait[] facts){
 		boolean[] b;
-		Vector<Integer> listeActions = new Vector<Integer>();
+		Vector<Pair<Integer,Integer>> listeActions = new Vector<Pair<Integer,Integer>>();
 		for(Fait f : facts){
 			double[] data = f.getData();
 			if(this.fact == f){
 				b = (this.premise.eval(f));
 				for(int i=0; i<data.length; i++){
 					if(b[i]){
-						listeActions.add(this.action);
+						Pair<Integer,Integer> paire = new Pair<Integer,Integer>(i,this.action);
+						listeActions.add(paire);
 					}
 				}
 			}
