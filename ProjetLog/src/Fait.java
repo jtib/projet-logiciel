@@ -36,4 +36,8 @@ public class Fait {
 		}
 		return listeActions;
 	}
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

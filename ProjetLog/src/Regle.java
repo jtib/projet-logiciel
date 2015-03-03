@@ -24,10 +24,17 @@ public class Regle {
 		return this.action;
 	}
 
+<<<<<<< Updated upstream
 	/** MÃ©thode pour Ã©tablir la liste des numÃ©ros des actions Ã  effectuer
 	 * 
 	 * @param facts Liste des faits auxquels appliquer les rÃ¨gles
 	 * @return la liste des actions Ã  effectuer (sous forme de numÃ©ros)
+=======
+	/** MŽthode pour Žtablir la liste des numŽros des actions ˆ effectuer
+	 * 
+	 * @param facts Liste des faits auxquels appliquer les rgles
+	 * @return la liste des actions ˆ effectuer (sous forme de numŽros)
+>>>>>>> Stashed changes
 	 */
 	public Vector<Pair<Integer,Integer>> aEffectuer(Fait[] facts){
 		boolean[] b;

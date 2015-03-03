@@ -19,30 +19,52 @@ public class Notes {
 		Vector<Integer> actions = regles[0].aEffectuer(regles, lesFaits);
 		int i = actions.firstElement();
 		if(i==0){
+<<<<<<< Updated upstream
 			System.out.print("C'est pas mal tout √ßa");
+=======
+			System.out.print("C'est pas mal tout ça");
+>>>>>>> Stashed changes
 		}
 	}*/
 
 	public static void main(String [] args){
 
+<<<<<<< Updated upstream
 		//D'abord, les notes de l'√©l√®ve
 		try(Scanner user_input = new Scanner(System.in)){
 			System.out.print("Entrez le nombre d'√©l√®ves : ");
+=======
+		//D'abord, les notes de l'élève
+		try(Scanner user_input = new Scanner(System.in)){
+			System.out.print("Entrez le nombre d'élèves : ");
+>>>>>>> Stashed changes
 			//ajouter exception si mauvais input
 			int nb_eleves = Integer.valueOf(user_input.next());
 			Fait[] lesFaits = new Fait[nb_eleves];
 			for(int j = 0; j < nb_eleves; j++){
+<<<<<<< Updated upstream
 				System.out.print("Entrez le nom de l'√©l√®ve : ");
 				//exception √† ajouter
 				String nom = user_input.next();
 				double[] notes = new double[9];
 				System.out.print("Notes de l'√©l√®ve\nMath√©matiques : ");
+=======
+				System.out.print("Entrez le nom de l'élève : ");
+				//exception à ajouter
+				String nom = user_input.next();
+				double[] notes = new double[9];
+				System.out.print("Notes de l'élève\nMathématiques : ");
+>>>>>>> Stashed changes
 				notes[0] = Double.valueOf(user_input.next());
 				System.out.print("Philosophie : ");
 				notes[1] = Double.valueOf(user_input.next());
 				System.out.print("Physique - chimie : ");
 				notes[2] = Double.valueOf(user_input.next());
+<<<<<<< Updated upstream
 				System.out.print("Histoire - G√©ographie : ");
+=======
+				System.out.print("Histoire - Géographie : ");
+>>>>>>> Stashed changes
 				notes[3] = Double.valueOf(user_input.next());
 				System.out.print("LV1 : ");
 				notes[4] = Double.valueOf(user_input.next());
@@ -55,7 +77,11 @@ public class Notes {
 				System.out.print("SVT : ");
 				notes[8] = Double.valueOf(user_input.next());
 				lesFaits[j] = new Fait(nom, notes);
+<<<<<<< Updated upstream
 				System.out.print("√âl√®ve " + (j+1) + " cr√©√©(e)\n");
+=======
+				System.out.print("Élève " + (j+1) + " créé(e)\n");
+>>>>>>> Stashed changes
 			}
 
 			//Les comparaisons...
@@ -88,8 +114,13 @@ public class Notes {
 			Comparaison compa6 [] = {comp20};
 			Condition cond6 = new Condition(compa6);
 
+<<<<<<< Updated upstream
 			//Pour enfin former les r√®gles
 			//ici on les applique toutes √† tous les faits donc une boucle suffit
+=======
+			//Pour enfin former les règles
+			//ici on les applique toutes à tous les faits donc une boucle suffit
+>>>>>>> Stashed changes
 			for(int k=0; k<nb_eleves; k++){
 				regles.add(new Regle(lesFaits[k], cond0, 0));
 				regles.add(new Regle(lesFaits[k], cond1, 1));
@@ -100,11 +131,16 @@ public class Notes {
 				regles.add(new Regle(lesFaits[k], cond6, 6));
 			}
 
+<<<<<<< Updated upstream
 			//On utilise la m√©thode de la classe Regle pour obtenir les actions √† effectuer
+=======
+			//On utilise la méthode de la classe Regle pour obtenir les actions à effectuer
+>>>>>>> Stashed changes
 			Vector<Pair<Integer,Integer>> actions = new Vector<Pair<Integer,Integer>>();
 			for(Fait f : lesFaits){
 				actions = f.aEffectuer(regles);
 				System.out.print(f.getName() + " :\n");
+<<<<<<< Updated upstream
 				//Et on ex√©cute les actions
 				for(Pair<Integer,Integer> a : actions){
 					//D√©termination de la mati√®re associ√©e
@@ -112,12 +148,25 @@ public class Notes {
 					String matiere = new String();
 					switch(k){
 					case 0 : matiere = "Math√©matiques";
+=======
+				//Et on exécute les actions
+				for(Pair<Integer,Integer> a : actions){
+					//Détermination de la matière associée
+					int k = a.getKey();
+					String matiere = new String();
+					switch(k){
+					case 0 : matiere = "Mathématiques";
+>>>>>>> Stashed changes
 					break;
 					case 1 : matiere = "Philosophie";
 					break;
 					case 2 : matiere = "Physique - chimie";
 					break;
+<<<<<<< Updated upstream
 					case 3 : matiere = "Histoire - G√©ographie";
+=======
+					case 3 : matiere = "Histoire - Géographie";
+>>>>>>> Stashed changes
 					break;
 					case 4 : matiere = "LV1";
 					break;
@@ -140,6 +189,7 @@ public class Notes {
 					break;
 					case 1 : System.out.print(matiere + " : Travaillez plus !\n");
 					break;
+<<<<<<< Updated upstream
 					case 2 : System.out.print(matiere + " : R√©sultats assez bons mais encore justes. Travaillez et gardez espoir.\n");
 					break;
 					case 3 : System.out.print(matiere + " : R√©sultats satisfaisants. Bon travail.\n");
@@ -149,6 +199,17 @@ public class Notes {
 					case 5 : System.out.print(matiere + " : Excellents r√©sultats !\n");
 					break;
 					case 6 : System.out.print(matiere + " : Parfait. Rien √† redire.\n");
+=======
+					case 2 : System.out.print(matiere + " : Résultats assez bons mais encore justes. Travaillez et gardez espoir.\n");
+					break;
+					case 3 : System.out.print(matiere + " : Résultats satisfaisants. Bon travail.\n");
+					break;
+					case 4 : System.out.print(matiere + " : Très bons résultats ! Continuez ainsi.\n");
+					break;
+					case 5 : System.out.print(matiere + " : Excellents résultats !\n");
+					break;
+					case 6 : System.out.print(matiere + " : Parfait. Rien à redire.\n");
+>>>>>>> Stashed changes
 					break;
 					default : System.out.print(matiere + " : Plop");
 					}

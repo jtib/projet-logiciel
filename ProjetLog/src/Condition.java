@@ -9,7 +9,7 @@ public class Condition {
 		this.comparaisons = compa;
 	}
 	
-	//ajouter méthode pour ajouter comparaison au vecteur comparaisons
+	//ajouter methode pour ajouter comparaison au vecteur comparaisons
 
 	/** Méthode pour évaluer une comparaison
 	 * 
@@ -39,7 +39,7 @@ public class Condition {
 		boolean bc [];
 		//pour chaque comparaison dans la condition
 		for(int i = 0; i < this.comparaisons.length; i++){
-			//on ≈Ωvalue la v≈Ωracit≈Ω de la comparaison pour toutes les valeurs indiqu≈Ωes dans le fait
+			//on Žvalue la veracite de la comparaison pour toutes les valeurs indiquees dans le fait
 			bc = evalComp(this.comparaisons[i], f);
 			//puis pour chaque valeur on combine les r≈Ωsultats
 			for(int j=0; j<data.length; j++){
