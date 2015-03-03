@@ -1,19 +1,19 @@
 
 public class Condition {
-	
+
 	//remplacer par un vecteur
 	Comparaison[] comparaisons;
-	
+
 	//creer un nouveau
 	public Condition(Comparaison[] compa){
 		this.comparaisons = compa;
 	}
 	
-	//ajouter mŽthode pour ajouter comparaison au vecteur comparaisons
-	
-	/** MŽthode pour Žvaluer une comparaison
+	//ajouter méthode pour ajouter comparaison au vecteur comparaisons
+
+	/** Méthode pour évaluer une comparaison
 	 * 
-	 * @return la vŽracitŽ de la comparaison
+	 * @return la veracite de la comparaison
 	 */
 	public boolean[] evalComp(Comparaison c, Fait f){
 		double data [] = f.getData();
@@ -25,10 +25,10 @@ public class Condition {
 		}
 		return bool;
 	}
-	
-	/** MŽthode pour Žvaluer la condition
+
+	/** Méthode pour évaluer la condition
 	 * 
-	 * @return la vŽracitŽ de la condition
+	 * @return la v≈Ωracit≈Ω de la condition
 	 */
 	public boolean[] eval(Fait f){
 		double[] data = f.getData();
@@ -39,9 +39,9 @@ public class Condition {
 		boolean bc [];
 		//pour chaque comparaison dans la condition
 		for(int i = 0; i < this.comparaisons.length; i++){
-			//on Žvalue la vŽracitŽ de la comparaison pour toutes les valeurs indiquŽes dans le fait
+			//on ≈Ωvalue la v≈Ωracit≈Ω de la comparaison pour toutes les valeurs indiqu≈Ωes dans le fait
 			bc = evalComp(this.comparaisons[i], f);
-			//puis pour chaque valeur on combine les rŽsultats
+			//puis pour chaque valeur on combine les r≈Ωsultats
 			for(int j=0; j<data.length; j++){
 				b[j] = b[j] && bc[j];
 			}
