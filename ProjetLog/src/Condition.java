@@ -1,49 +1,52 @@
 
 public class Condition {
-
+	
+	//remplacer par un vecteur
 	Comparaison[] comparaisons;
-	Fait fait;
-
-	public Condition(Comparaison[] compa, Fait fact){
+	
+	//creer un nouveau
+	public Condition(Comparaison[] compa){
 		this.comparaisons = compa;
-		this.fait = fact;
 	}
+	
+	//ajouter méthode pour ajouter comparaison au vecteur comparaisons
 	
 	/** Méthode pour évaluer une comparaison
 	 * 
 	 * @return la véracité de la comparaison
 	 */
-	public boolean evalComp(Comparaison c){
-		boolean b;
-		double a = this.fait.data[Integer.valueOf(c.comp[0])];
-		double nb = Double.valueOf(c.comp[2]);
-		switch(c.comp[1]){
-		case "<": b = a < nb;
-		break;
-		case ">": b = a > nb;
-		break;
-		case "<=": b = a <= nb;
-		break;
-		case ">=": b = a >= nb;
-		break;
-		case "==": b = a == nb;
-		default: b = true;
-		break;
+	public boolean[] evalComp(Comparaison c, Fait f){
+		double data [] = f.getData();
+		boolean bool [] = new boolean[data.length];
+		for(int i=0; i<data.length; i++){
+			double a = data[i];
+			c.setFirstArg(a);
+			bool[i] = c.eval();
 		}
-		return b;
+		return bool;
 	}
-
+	
 	/** Méthode pour évaluer la condition
 	 * 
 	 * @return la véracité de la condition
 	 */
-	public boolean eval(){
-		boolean b = true;
-		boolean bc;
-		for(int i = comparaisons.length - 1; i == 0; i--){
-			bc = evalComp(comparaisons[i]);
-			b = b && bc;
+	public boolean[] eval(Fait f){
+		double[] data = f.getData();
+		boolean b [] = new boolean[data.length];
+		//Problème : si la condition ne s'applique à rien, restera true
+		for(int k=0; k<b.length; k++){
+			b[k]=true;
 		}
-		return b;
+		boolean bc [];
+		//pour chaque comparaison dans la condition
+		for(int i = 0; i < this.comparaisons.length; i++){
+			//on évalue la véracité de la comparaison pour toutes les valeurs indiquées dans le fait
+			bc = evalComp(this.comparaisons[i], f);
+			//puis pour chaque valeur on combine les résultats
+			for(int j=0; j<data.length; j++){
+				b[j] = b[j] && bc[j];
+			}
+		}
+		return b;	
 	}
 }

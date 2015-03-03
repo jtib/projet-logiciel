@@ -1,11 +1,19 @@
 
-public class Fait extends Predicat {
-
+public class Fait {
+	
 	private String name;
-	public double[] data;//mettre en pas public plus tard
-
+	private double[] data;
+	
 	public Fait(String nom, double[] donnees){
 		this.name = nom;
 		this.data = donnees;
+	}
+	
+	public double[] getData(){
+		return this.data;
+	}
+	
+	public String getName(){
+		return this.name;
 	}
 }
