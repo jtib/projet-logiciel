@@ -9,7 +9,7 @@ public class Comparaison {
 		comp[2] = String.valueOf(b);
 	}
 	
-	/** M�thode pour modifier le premier terme de la comparaison
+	/** Méthode pour modifier le premier terme de la comparaison
 	 * 
 	 * @param a La nouvelle valeur du premier terme 
 	 */
@@ -17,10 +17,18 @@ public class Comparaison {
 		this.comp[0] = String.valueOf(a);
 	}
 	
+	/** Méthode pour obtenir un terme de la comparaison
+	 * 
+	 * @return le terme demandé
+	 */
 	public double getElement(int i){
-		return Double.valueOf(this.comp[i]);
+			return Double.valueOf(this.comp[i]);
 	}
 	
+	/** Méthode pour évaluer une comparaison
+	 * 
+	 * @return un booléen qui indique si la comparaison est vraie ou fausse
+	 */
 	public boolean eval(){
 		boolean bool;
 		double a = Double.valueOf(this.comp[0]);
@@ -35,6 +43,7 @@ public class Comparaison {
 			case ">=": bool = a >= b;
 				break;
 			case "==": bool = a == b;
+				break;
 			default: bool = true;
 				break;
 		}
