@@ -2,7 +2,7 @@
 public class Comparaison {
 	
 	private String[] comp;
-	
+
 	public Comparaison(String op, double b){
 		this.comp = new String[3];
 		comp[1] = op;
@@ -34,19 +34,19 @@ public class Comparaison {
 		double a = Double.valueOf(this.comp[0]);
 		double b = Double.valueOf(this.comp[2]);
 		switch(this.comp[1]){
-			case "<": bool = a < b;
-				break;
-			case ">": bool = a > b;
-				break;
-			case "<=": bool = a <= b;
-				break;
-			case ">=": bool = a >= b;
-				break;
-			case "==": bool = a == b;
-				break;
-			default: bool = true;
-				break;
-		}
+		case "<": bool = a < b;
+			break;
+		case ">": bool = a > b;
+			break;
+		case "<=": bool = a <= b;
+			break;
+		case ">=": bool = a >= b;
+			break;
+		case "==": bool = a == b;
+			break;
+		default: bool = true;
+			break;
+	}
 		return bool;
 	}
 }
