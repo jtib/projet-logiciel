@@ -34,13 +34,6 @@ public class Comparaison {
 		double a = Double.valueOf(this.comp[0]);
 		double b = Double.valueOf(this.comp[2]);
 		switch(this.comp[1]){
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 		case "<": bool = a < b;
 			break;
 		case ">": bool = a > b;
@@ -54,27 +47,6 @@ public class Comparaison {
 		default: bool = true;
 			break;
 	}
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-=======
-			case "<": bool = a < b;
-				break;
-			case ">": bool = a > b;
-				break;
-			case "<=": bool = a <= b;
-				break;
-			case ">=": bool = a >= b;
-				break;
-			case "==": bool = a == b;
-				break;
-			default: bool = true;
-				break;
-		}
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 		return bool;
 	}
 }
