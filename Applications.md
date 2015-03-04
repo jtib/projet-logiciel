@@ -44,32 +44,3 @@ Condition (moyenne générale)| Appréciation
 [15,17[ | Très bon résultats, élève sérieux, le travail est très satisfaisant.
 [17,19[ | Excellents résultats !
 20 | Bilan parfait, élève exemplaire tout à fait exceptionnel !
-
-
-***
-
-Possibilité de règles pour les **BULLETINS DE PRESENCE SUR UN MOIS**
-
-***
-
-Possibilité de règles pour les **BULLETINS METEOROLOGIQUES**
-
-Condition 1 (Soleil)| Condition 2 (Pluie)| Condition 3 (Neige)| Appréciation|
------------- | ------------ | ------------ | ------------ | ------------ | ------------|
-<5| |  Un soleil un peu voilé.
-<10| | Timides éclarcies.
-<20| |  De belles éclarcies.
-| 1<x<5|  Il y a de pluies fines.
-| <10| |  Prenez votre parapluie en sortant.
-| <20| |  Des averses sont à prévoir.
-| | 1<5|  Petites chutes de neige.
-| | <10| Pensez à changer les pneus hiver.
-
-Condition 4 (Nuage)| Condition 5 (Brouillard)| Condition 6 (Vent)| Appréciation|
------------- | ------------ | ------------ | ------------ | ------------ | ------------|
- >5| | | Le ciel est quelque peu couvert.
- <10| | | Des grisailles.
- | | <10| Le vent est modéré.
- | | <20| Des rafales de vent.
- | <10 | | Des brumes de brouillard.
- | <20| | Ciel couvert, fort brouillard.
