@@ -44,34 +44,34 @@ public class Notes {
 			}
 			
 			//Les comparaisons...
-			Comparaison comp050 = new Comparaison("<",5);
-			Comparaison comp051 = new Comparaison(">=",5);
-			Comparaison comp100 = new Comparaison("<",10);
-			Comparaison comp101 = new Comparaison(">=",10);
-			Comparaison comp130 = new Comparaison("<",13);
-			Comparaison comp131 = new Comparaison(">=",13);
-			Comparaison comp150 = new Comparaison("<",15);
-			Comparaison comp151 = new Comparaison(">=",15);
-			Comparaison comp170 = new Comparaison("<",17);
-			Comparaison comp171 = new Comparaison(">=",17);
-			Comparaison comp190 = new Comparaison("<=",19);
-			Comparaison comp20 = new Comparaison("==",20);
+			Comparaison comp050 = new Comparaison("all","<",5);
+			Comparaison comp051 = new Comparaison("all",">=",5);
+			Comparaison comp100 = new Comparaison("all","<",10);
+			Comparaison comp101 = new Comparaison("all",">=",10);
+			Comparaison comp130 = new Comparaison("all","<",13);
+			Comparaison comp131 = new Comparaison("all",">=",13);
+			Comparaison comp150 = new Comparaison("all","<",15);
+			Comparaison comp151 = new Comparaison("all",">=",15);
+			Comparaison comp170 = new Comparaison("all","<",17);
+			Comparaison comp171 = new Comparaison("all",">=",17);
+			Comparaison comp190 = new Comparaison("all","<=",19);
+			Comparaison comp20 = new Comparaison("all","==",20);
 			
-			//...que l'on combine dans les conditions simples
+			//...que l'on combine dans les conditions
 			Comparaison compa0 [] = {comp050};
-			ConditionSimple cond0 = new ConditionSimple(compa0);
+			Condition cond0 = new Condition(compa0);
 			Comparaison compa1 [] = {comp051, comp100};
-			ConditionSimple cond1 = new ConditionSimple(compa1);
+			Condition cond1 = new Condition(compa1);
 			Comparaison compa2 [] = {comp101, comp130};
-			ConditionSimple cond2 = new ConditionSimple(compa2);
+			Condition cond2 = new Condition(compa2);
 			Comparaison compa3 [] = {comp131, comp150};
-			ConditionSimple cond3 = new ConditionSimple(compa3);
+			Condition cond3 = new Condition(compa3);
 			Comparaison compa4 [] = {comp151, comp170};
-			ConditionSimple cond4 = new ConditionSimple(compa4);
+			Condition cond4 = new Condition(compa4);
 			Comparaison compa5 [] = {comp171, comp190};
-			ConditionSimple cond5 = new ConditionSimple(compa5);
+			Condition cond5 = new Condition(compa5);
 			Comparaison compa6 [] = {comp20};
-			ConditionSimple cond6 = new ConditionSimple(compa6);
+			Condition cond6 = new Condition(compa6);
 			
 			//Pour enfin former les regles
 			//ici on les applique toutes a tous les faits donc une boucle suffit
