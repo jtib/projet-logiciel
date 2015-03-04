@@ -16,16 +16,26 @@ public class Condition {
 	 * @return la veracite de la comparaison
 	 */
 	public boolean[] evalComp(Comparaison c, Fait f){
+		Class classe = c.getClass();
+		boolean[] bool = (classe.equals(ComparaisonSimple.class) ? evalCompSimple(c,f) : evalCompDouble(c,f));
+		return bool;
+	}
+	
+	/** Methode pour evaluer une comparaison simple
+	 * 
+	 * @return la veracite de la comparaison
+	 */
+	public boolean[] evalCompSimple(Comparaison c, Fait f){
 		double data [] = f.getData();
 		boolean bool [] = new boolean[data.length];
 		for(boolean b : bool){
-			b = false;
+			b = true;
 		}
 		//Si la comparaison s'applique à toutes les données
 		if(c.getElement(0) == "all"){
 			for(int i=0; i<data.length; i++){
 				double a = data[i];
-				c.setFirstArg(a);
+				c.setArg(0,String.valueOf(a));
 				bool[i] = c.eval();
 			}
 		}
@@ -33,8 +43,33 @@ public class Condition {
 		else{
 			int i = Integer.valueOf(c.getElement(0));
 			double a = data[i];
-			c.setFirstArg(a);
-			bool[i] = c.eval();}
+			c.setArg(0,String.valueOf(a));
+			bool[i] = c.eval();
+		}
+		return bool;
+	}
+	
+	
+	
+	
+	
+	/** Methode pour evaluer une comparaison double
+	 * 
+	 * @return la veracite de la comparaison
+	 */
+	public boolean[] evalCompDouble(Comparaison c, Fait f){
+		double data [] = f.getData();
+		boolean bool [] = new boolean[data.length];
+		for(boolean b : bool){
+			b = true;
+		}
+		int i = Integer.valueOf(c.getElement(0));
+		int j = Integer.valueOf(c.getElement(2));
+		double arg1 = data[i];
+		double arg2 = data[j];
+		c.setArg(0,String.valueOf(arg1));
+		c.setArg(2, String.valueOf(arg2));
+		bool[i] = c.eval();
 		return bool;
 	}
 	
