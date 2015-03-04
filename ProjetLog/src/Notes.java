@@ -6,65 +6,26 @@ public class Notes {
 
 	public static Vector<Regle> regles = new Vector<Regle>();
 
-
-	/*public static void main(String [] args){
-		double notes1 [] = {18,13};
-		Fait fait1 = new Fait("Eve", notes1);
-		Fait lesFaits [] = {fait1};
-		Comparaison comp1 = new Comparaison(0, "<", 20);
-		Comparaison comp2 = new Comparaison(1, ">=", 12);
-		Comparaison compa [] = {comp1,comp2};
-		Condition cond1 = new Condition(compa);
-		regles[0] = new Regle(fait1, cond1, 0);
-		Vector<Integer> actions = regles[0].aEffectuer(regles, lesFaits);
-		int i = actions.firstElement();
-		if(i==0){
-<<<<<<< Updated upstream
-			System.out.print("C'est pas mal tout √ßa");
-=======
-			System.out.print("C'est pas mal tout ça");
->>>>>>> Stashed changes
-		}
-	}*/
-
 	public static void main(String [] args){
 
-<<<<<<< Updated upstream
-		//D'abord, les notes de l'√©l√®ve
+		//D'abord, les notes de l'eleve
 		try(Scanner user_input = new Scanner(System.in)){
-			System.out.print("Entrez le nombre d'√©l√®ves : ");
-=======
-		//D'abord, les notes de l'élève
-		try(Scanner user_input = new Scanner(System.in)){
-			System.out.print("Entrez le nombre d'élèves : ");
->>>>>>> Stashed changes
+			System.out.print("Entrez le nombre d'eleves : ");
 			//ajouter exception si mauvais input
 			int nb_eleves = Integer.valueOf(user_input.next());
 			Fait[] lesFaits = new Fait[nb_eleves];
 			for(int j = 0; j < nb_eleves; j++){
-<<<<<<< Updated upstream
-				System.out.print("Entrez le nom de l'√©l√®ve : ");
-				//exception √† ajouter
+				System.out.print("Entrez le nom de l'eleve : ");
+				//exception √É¬† ajouter
 				String nom = user_input.next();
 				double[] notes = new double[9];
-				System.out.print("Notes de l'√©l√®ve\nMath√©matiques : ");
-=======
-				System.out.print("Entrez le nom de l'élève : ");
-				//exception à ajouter
-				String nom = user_input.next();
-				double[] notes = new double[9];
-				System.out.print("Notes de l'élève\nMathématiques : ");
->>>>>>> Stashed changes
+				System.out.print("Notes de l'eleve\nMathematiques : ");
 				notes[0] = Double.valueOf(user_input.next());
 				System.out.print("Philosophie : ");
 				notes[1] = Double.valueOf(user_input.next());
 				System.out.print("Physique - chimie : ");
 				notes[2] = Double.valueOf(user_input.next());
-<<<<<<< Updated upstream
-				System.out.print("Histoire - G√©ographie : ");
-=======
-				System.out.print("Histoire - Géographie : ");
->>>>>>> Stashed changes
+				System.out.print("Histoire - Geographie : ");
 				notes[3] = Double.valueOf(user_input.next());
 				System.out.print("LV1 : ");
 				notes[4] = Double.valueOf(user_input.next());
@@ -77,11 +38,7 @@ public class Notes {
 				System.out.print("SVT : ");
 				notes[8] = Double.valueOf(user_input.next());
 				lesFaits[j] = new Fait(nom, notes);
-<<<<<<< Updated upstream
-				System.out.print("√âl√®ve " + (j+1) + " cr√©√©(e)\n");
-=======
-				System.out.print("Élève " + (j+1) + " créé(e)\n");
->>>>>>> Stashed changes
+				System.out.print("Eleve " + (j+1) + " cree(e)\n");
 			}
 
 			//Les comparaisons...
@@ -114,13 +71,8 @@ public class Notes {
 			Comparaison compa6 [] = {comp20};
 			Condition cond6 = new Condition(compa6);
 
-<<<<<<< Updated upstream
-			//Pour enfin former les r√®gles
-			//ici on les applique toutes √† tous les faits donc une boucle suffit
-=======
-			//Pour enfin former les règles
-			//ici on les applique toutes à tous les faits donc une boucle suffit
->>>>>>> Stashed changes
+			//Pour enfin former les regles
+			//ici on les applique toutes a tous les faits donc une boucle suffit
 			for(int k=0; k<nb_eleves; k++){
 				regles.add(new Regle(lesFaits[k], cond0, 0));
 				regles.add(new Regle(lesFaits[k], cond1, 1));
@@ -131,42 +83,24 @@ public class Notes {
 				regles.add(new Regle(lesFaits[k], cond6, 6));
 			}
 
-<<<<<<< Updated upstream
-			//On utilise la m√©thode de la classe Regle pour obtenir les actions √† effectuer
-=======
-			//On utilise la méthode de la classe Regle pour obtenir les actions à effectuer
->>>>>>> Stashed changes
+			//On utilise la methode de la classe Fait pour obtenir les actions a effectuer
 			Vector<Pair<Integer,Integer>> actions = new Vector<Pair<Integer,Integer>>();
 			for(Fait f : lesFaits){
 				actions = f.aEffectuer(regles);
 				System.out.print(f.getName() + " :\n");
-<<<<<<< Updated upstream
-				//Et on ex√©cute les actions
+				//Et on execute les actions
 				for(Pair<Integer,Integer> a : actions){
-					//D√©termination de la mati√®re associ√©e
+					//Determination de la matiere associee
 					int k = a.getKey();
 					String matiere = new String();
 					switch(k){
-					case 0 : matiere = "Math√©matiques";
-=======
-				//Et on exécute les actions
-				for(Pair<Integer,Integer> a : actions){
-					//Détermination de la matière associée
-					int k = a.getKey();
-					String matiere = new String();
-					switch(k){
-					case 0 : matiere = "Mathématiques";
->>>>>>> Stashed changes
+					case 0 : matiere = "Mathematiques";
 					break;
 					case 1 : matiere = "Philosophie";
 					break;
 					case 2 : matiere = "Physique - chimie";
 					break;
-<<<<<<< Updated upstream
-					case 3 : matiere = "Histoire - G√©ographie";
-=======
-					case 3 : matiere = "Histoire - Géographie";
->>>>>>> Stashed changes
+					case 3 : matiere = "Histoire - G≈Ωographie";
 					break;
 					case 4 : matiere = "LV1";
 					break;
@@ -189,27 +123,15 @@ public class Notes {
 					break;
 					case 1 : System.out.print(matiere + " : Travaillez plus !\n");
 					break;
-<<<<<<< Updated upstream
-					case 2 : System.out.print(matiere + " : R√©sultats assez bons mais encore justes. Travaillez et gardez espoir.\n");
+					case 2 : System.out.print(matiere + " : Resultats assez bons mais encore justes. Travaillez et gardez espoir.\n");
 					break;
-					case 3 : System.out.print(matiere + " : R√©sultats satisfaisants. Bon travail.\n");
+					case 3 : System.out.print(matiere + " : Resultats satisfaisants. Bon travail.\n");
 					break;
-					case 4 : System.out.print(matiere + " : Tr√®s bons r√©sultats ! Continuez ainsi.\n");
+					case 4 : System.out.print(matiere + " : Tres bons resultats ! Continuez ainsi.\n");
 					break;
-					case 5 : System.out.print(matiere + " : Excellents r√©sultats !\n");
+					case 5 : System.out.print(matiere + " : Excellents resultats !\n");
 					break;
-					case 6 : System.out.print(matiere + " : Parfait. Rien √† redire.\n");
-=======
-					case 2 : System.out.print(matiere + " : Résultats assez bons mais encore justes. Travaillez et gardez espoir.\n");
-					break;
-					case 3 : System.out.print(matiere + " : Résultats satisfaisants. Bon travail.\n");
-					break;
-					case 4 : System.out.print(matiere + " : Très bons résultats ! Continuez ainsi.\n");
-					break;
-					case 5 : System.out.print(matiere + " : Excellents résultats !\n");
-					break;
-					case 6 : System.out.print(matiere + " : Parfait. Rien à redire.\n");
->>>>>>> Stashed changes
+					case 6 : System.out.print(matiere + " : Parfait. Rien a redire.\n");
 					break;
 					default : System.out.print(matiere + " : Plop");
 					}
