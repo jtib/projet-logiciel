@@ -2,14 +2,15 @@
 public class Comparaison {
 	
 	private String[] comp;
-
-	public Comparaison(String op, double b){
+	
+	public Comparaison(String arg, String op, double b){
 		this.comp = new String[3];
+		comp[0] = arg;
 		comp[1] = op;
 		comp[2] = String.valueOf(b);
 	}
 	
-	/** Méthode pour modifier le premier terme de la comparaison
+	/** Methode pour modifier le premier terme de la comparaison
 	 * 
 	 * @param a La nouvelle valeur du premier terme 
 	 */
@@ -17,36 +18,28 @@ public class Comparaison {
 		this.comp[0] = String.valueOf(a);
 	}
 	
-	/** Méthode pour obtenir un terme de la comparaison
-	 * 
-	 * @return le terme demandé
-	 */
-	public double getElement(int i){
-			return Double.valueOf(this.comp[i]);
+	public String getElement(int i){
+		return this.comp[i];
 	}
 	
-	/** Méthode pour évaluer une comparaison
-	 * 
-	 * @return un booléen qui indique si la comparaison est vraie ou fausse
-	 */
 	public boolean eval(){
 		boolean bool;
 		double a = Double.valueOf(this.comp[0]);
 		double b = Double.valueOf(this.comp[2]);
 		switch(this.comp[1]){
-		case "<": bool = a < b;
-			break;
-		case ">": bool = a > b;
-			break;
-		case "<=": bool = a <= b;
-			break;
-		case ">=": bool = a >= b;
-			break;
-		case "==": bool = a == b;
-			break;
-		default: bool = true;
-			break;
-	}
+			case "<": bool = a < b;
+				break;
+			case ">": bool = a > b;
+				break;
+			case "<=": bool = a <= b;
+				break;
+			case ">=": bool = a >= b;
+				break;
+			case "==": bool = a == b;
+				break;
+			default: bool = true;
+				break;
+		}
 		return bool;
 	}
 }
