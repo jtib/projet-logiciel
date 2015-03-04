@@ -1,13 +1,15 @@
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.Vector;
 
 
 public class Notes {
-
+	
 	public static Vector<Regle> regles = new Vector<Regle>();
-
+	
 	public static void main(String [] args){
-
+		
 		//D'abord, les notes de l'eleve
 		try(Scanner user_input = new Scanner(System.in)){
 			System.out.print("Entrez le nombre d'eleves : ");
@@ -16,7 +18,7 @@ public class Notes {
 			Fait[] lesFaits = new Fait[nb_eleves];
 			for(int j = 0; j < nb_eleves; j++){
 				System.out.print("Entrez le nom de l'eleve : ");
-				//exception Ã  ajouter
+				//exception a ajouter
 				String nom = user_input.next();
 				double[] notes = new double[9];
 				System.out.print("Notes de l'eleve\nMathematiques : ");
@@ -38,9 +40,9 @@ public class Notes {
 				System.out.print("SVT : ");
 				notes[8] = Double.valueOf(user_input.next());
 				lesFaits[j] = new Fait(nom, notes);
-				System.out.print("Eleve " + (j+1) + " cree(e)\n");
+				System.out.print("eleve " + (j+1) + " cree(e)\n");
 			}
-
+			
 			//Les comparaisons...
 			Comparaison comp050 = new Comparaison("<",5);
 			Comparaison comp051 = new Comparaison(">=",5);
@@ -54,23 +56,23 @@ public class Notes {
 			Comparaison comp171 = new Comparaison(">=",17);
 			Comparaison comp190 = new Comparaison("<=",19);
 			Comparaison comp20 = new Comparaison("==",20);
-
-			//...que l'on combine dans les conditions
+			
+			//...que l'on combine dans les conditions simples
 			Comparaison compa0 [] = {comp050};
-			Condition cond0 = new Condition(compa0);
+			ConditionSimple cond0 = new ConditionSimple(compa0);
 			Comparaison compa1 [] = {comp051, comp100};
-			Condition cond1 = new Condition(compa1);
+			ConditionSimple cond1 = new ConditionSimple(compa1);
 			Comparaison compa2 [] = {comp101, comp130};
-			Condition cond2 = new Condition(compa2);
+			ConditionSimple cond2 = new ConditionSimple(compa2);
 			Comparaison compa3 [] = {comp131, comp150};
-			Condition cond3 = new Condition(compa3);
+			ConditionSimple cond3 = new ConditionSimple(compa3);
 			Comparaison compa4 [] = {comp151, comp170};
-			Condition cond4 = new Condition(compa4);
+			ConditionSimple cond4 = new ConditionSimple(compa4);
 			Comparaison compa5 [] = {comp171, comp190};
-			Condition cond5 = new Condition(compa5);
+			ConditionSimple cond5 = new ConditionSimple(compa5);
 			Comparaison compa6 [] = {comp20};
-			Condition cond6 = new Condition(compa6);
-
+			ConditionSimple cond6 = new ConditionSimple(compa6);
+			
 			//Pour enfin former les regles
 			//ici on les applique toutes a tous les faits donc une boucle suffit
 			for(int k=0; k<nb_eleves; k++){
@@ -82,58 +84,59 @@ public class Notes {
 				regles.add(new Regle(lesFaits[k], cond5, 5));
 				regles.add(new Regle(lesFaits[k], cond6, 6));
 			}
-
-			//On utilise la methode de la classe Fait pour obtenir les actions a effectuer
-			Vector<Pair<Integer,Integer>> actions = new Vector<Pair<Integer,Integer>>();
+			
+			//On utilise la methode de la classe Regle pour obtenir les actions a effectuer
+			Hashtable<Integer,Integer> actions = new Hashtable<Integer,Integer>();
 			for(Fait f : lesFaits){
 				actions = f.aEffectuer(regles);
 				System.out.print(f.getName() + " :\n");
 				//Et on execute les actions
-				for(Pair<Integer,Integer> a : actions){
+				Enumeration<Integer> enumKey = actions.keys();
+				while(enumKey.hasMoreElements()){
 					//Determination de la matiere associee
-					int k = a.getKey();
+					int k = enumKey.nextElement();
 					String matiere = new String();
 					switch(k){
-					case 0 : matiere = "Mathematiques";
-					break;
-					case 1 : matiere = "Philosophie";
-					break;
-					case 2 : matiere = "Physique - chimie";
-					break;
-					case 3 : matiere = "Histoire - GŽographie";
-					break;
-					case 4 : matiere = "LV1";
-					break;
-					case 5 : matiere = "LV2";
-					break;
-					case 6 : matiere = "ECJS";
-					break;
-					case 7 : matiere = "EPS";
-					break;
-					case 8 : matiere = "SVT";
-					break;
-					default : matiere = "Pipo";
-					break;
+						case 0 : matiere = "Mathematiques";
+							break;
+						case 1 : matiere = "Philosophie";
+							break;
+						case 2 : matiere = "Physique - chimie";
+							break;
+						case 3 : matiere = "Histoire - Geographie";
+							break;
+						case 4 : matiere = "LV1";
+							break;
+						case 5 : matiere = "LV2";
+							break;
+						case 6 : matiere = "ECJS";
+							break;
+						case 7 : matiere = "EPS";
+							break;
+						case 8 : matiere = "SVT";
+							break;
+						default : matiere = "Pipo";
+							break;
 					}
 					
 					//Affichage des commentaires
-					int v = a.getValue();
+					int v = actions.get(k);
 					switch(v){
-					case 0 : System.out.print(matiere + " : Mettez-vous au travail !\n");
-					break;
-					case 1 : System.out.print(matiere + " : Travaillez plus !\n");
-					break;
-					case 2 : System.out.print(matiere + " : Resultats assez bons mais encore justes. Travaillez et gardez espoir.\n");
-					break;
-					case 3 : System.out.print(matiere + " : Resultats satisfaisants. Bon travail.\n");
-					break;
-					case 4 : System.out.print(matiere + " : Tres bons resultats ! Continuez ainsi.\n");
-					break;
-					case 5 : System.out.print(matiere + " : Excellents resultats !\n");
-					break;
-					case 6 : System.out.print(matiere + " : Parfait. Rien a redire.\n");
-					break;
-					default : System.out.print(matiere + " : Plop");
+						case 0 : System.out.print(matiere + " : Mettez-vous au travail !\n");
+							break;
+						case 1 : System.out.print(matiere + " : Travaillez plus !\n");
+							break;
+						case 2 : System.out.print(matiere + " : Resultats assez bons mais encore justes. Travaillez et gardez espoir.\n");
+							break;
+						case 3 : System.out.print(matiere + " : Resultats satisfaisants. Bon travail.\n");
+							break;
+						case 4 : System.out.print(matiere + " : Tres bons resultats ! Continuez ainsi.\n");
+							break;
+						case 5 : System.out.print(matiere + " : Excellents resultats !\n");
+							break;
+						case 6 : System.out.print(matiere + " : Parfait. Rien a redire.\n");
+							break;
+						default : System.out.print(matiere + " : Plop");
 					}
 				}
 			}
