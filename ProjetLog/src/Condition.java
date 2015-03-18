@@ -1,16 +1,16 @@
 
 public class Condition {
-	
+
 	//remplacer par un vecteur
 	Comparaison[] comparaisons;
-	
+
 	//creer un nouveau
 	public Condition(Comparaison[] compa){
 		this.comparaisons = compa;
 	}
-	
+
 	//ajouter methode pour ajouter comparaison au vecteur comparaisons
-	
+
 	/** Methode pour evaluer une comparaison
 	 * 
 	 * @return la veracite de la comparaison
@@ -20,7 +20,7 @@ public class Condition {
 		boolean[] bool = (classe.equals(ComparaisonSimple.class) ? evalCompSimple(c,f) : evalCompDouble(c,f));
 		return bool;
 	}
-	
+
 	/** Methode pour evaluer une comparaison simple
 	 * 
 	 * @return la veracite de la comparaison
@@ -31,15 +31,17 @@ public class Condition {
 		for(boolean b : bool){
 			b = true;
 		}
-		//Si la comparaison s'applique √† toutes les donn√©es
+		System.out.print(c.getElement(0));
+		//Si la comparaison s'applique à toutes les données
 		if(c.getElement(0) == "all"){
 			for(int i=0; i<data.length; i++){
 				double a = data[i];
 				c.setArg(0,String.valueOf(a));
 				bool[i] = c.eval();
 			}
+			c.setArg(0, "all");
 		}
-		//Sinon ne pas faire de for, √©valuer seulement pour num√©ro concern√©
+		//Sinon ne pas faire de for, évaluer seulement pour numéro concerné
 		else{
 			int i = Integer.valueOf(c.getElement(0));
 			double a = data[i];
@@ -48,11 +50,11 @@ public class Condition {
 		}
 		return bool;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	/** Methode pour evaluer une comparaison double
 	 * 
 	 * @return la veracite de la comparaison
@@ -72,7 +74,7 @@ public class Condition {
 		bool[i] = c.eval();
 		return bool;
 	}
-	
+
 	/** Methode pour evaluer la condition
 	 * 
 	 * @return la veracite de la condition
