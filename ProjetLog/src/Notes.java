@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+//import java.util.Iterator;
 //import java.util.Enumeration;
 //import java.util.HashMap;
 //import java.util.Hashtable;
 //import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 //import java.util.Map;
 import java.util.Scanner;
 //import java.util.Set;
@@ -13,12 +15,12 @@ import java.util.Vector;
 public class Notes {
 
 	public static Vector<Regle> regles = new Vector<Regle>();
-	
+
 	public static Condition[] creationConditions(){
-		
+
 		//À retourner
 		Condition[] cond = new Condition[7];
-		
+
 		//Les comparaisons
 		ComparaisonSimple comp050 = new ComparaisonSimple("all","<","5");
 		ComparaisonSimple comp051 = new ComparaisonSimple("all",">=","5");
@@ -34,7 +36,7 @@ public class Notes {
 		ComparaisonSimple comp20 = new ComparaisonSimple("all","==","20");
 
 		//ComparaisonDouble compTest = new ComparaisonDouble("2", "==", "3");
-		
+
 		//Les conditions
 		Comparaison compa0 [] = {comp050};
 		cond[0] = new Condition(compa0);
@@ -53,9 +55,9 @@ public class Notes {
 
 		//ComparaisonDouble compaTest [] = {compTest};
 		//Condition condTest = new Condition(compaTest);
-		
+
 		return cond;
-		
+
 	}
 
 	public static void main(String [] args){
@@ -65,59 +67,78 @@ public class Notes {
 			System.out.print("Entrez le nombre d'eleves : ");
 			//ajouter exception si mauvais input
 			int nb_eleves = Integer.valueOf(user_input.next());
-			Fait[] lesFaits = new Fait[nb_eleves];
+			List<Fait> lesFaits = new ArrayList<Fait>();
 			for(int j = 0; j < nb_eleves; j++){
 				System.out.print("Entrez le nom de l'eleve : ");
 				//exception a ajouter
 				String nom = user_input.next();
-				double[] notes = new double[9];
+				List<Double> notes = new ArrayList<Double>();
 				System.out.print("Notes de l'eleve\nMathematiques : ");
-				notes[0] = Double.valueOf(user_input.next());
+				notes.add(Double.valueOf(user_input.next()));
 				System.out.print("Philosophie : ");
-				notes[1] = Double.valueOf(user_input.next());
+				notes.add(Double.valueOf(user_input.next()));
 				System.out.print("Physique - chimie : ");
-				notes[2] = Double.valueOf(user_input.next());
+				notes.add(Double.valueOf(user_input.next()));
 				System.out.print("Histoire - Geographie : ");
-				notes[3] = Double.valueOf(user_input.next());
+				notes.add(Double.valueOf(user_input.next()));
 				System.out.print("LV1 : ");
-				notes[4] = Double.valueOf(user_input.next());
+				notes.add(Double.valueOf(user_input.next()));
 				System.out.print("LV2 : ");
-				notes[5] = Double.valueOf(user_input.next());
+				notes.add(Double.valueOf(user_input.next()));
 				System.out.print("ECJS : ");
-				notes[6] = Double.valueOf(user_input.next());
+				notes.add(Double.valueOf(user_input.next()));
 				System.out.print("EPS : ");
-				notes[7] = Double.valueOf(user_input.next());
+				notes.add(Double.valueOf(user_input.next()));
 				System.out.print("SVT : ");
-				notes[8] = Double.valueOf(user_input.next());
-				lesFaits[j] = new Fait(nom, notes);
+				notes.add(Double.valueOf(user_input.next()));
+				lesFaits.add(new Fait(nom, notes));
 				System.out.print("eleve " + (j+1) + " cree(e)\n");
 			}
-			
+
 
 			Condition[] cond = creationConditions();
-			
+
 			//Pour enfin former les regles
 			//ici on les applique toutes a tous les faits donc une boucle suffit
 			for(int k=0; k<nb_eleves; k++){
-				regles.add(new Regle(lesFaits[k], cond[0], 0));
-				regles.add(new Regle(lesFaits[k], cond[1], 1));
-				regles.add(new Regle(lesFaits[k], cond[2], 2));
-				regles.add(new Regle(lesFaits[k], cond[3], 3));
-				regles.add(new Regle(lesFaits[k], cond[4], 4));
-				regles.add(new Regle(lesFaits[k], cond[5], 5));
-				regles.add(new Regle(lesFaits[k], cond[6], 6));
+				regles.add(new Regle(lesFaits.get(k), cond[0], 0));
+				regles.add(new Regle(lesFaits.get(k), cond[1], 1));
+				regles.add(new Regle(lesFaits.get(k), cond[2], 2));
+				regles.add(new Regle(lesFaits.get(k), cond[3], 3));
+				regles.add(new Regle(lesFaits.get(k), cond[4], 4));
+				regles.add(new Regle(lesFaits.get(k), cond[5], 5));
+				regles.add(new Regle(lesFaits.get(k), cond[6], 6));
 
 				//regles.add(new Regle(lesFaits[k], condTest, 7));
 			}
+			
+			//Regle supplementaire qui ne s'appliquera que sur un nouveau fait de la liste
+			List<Double> acts = new ArrayList<Double>();
+			acts.add(0.0);
+			//Le fait, c'est maths + mettez-vous au travail, i.e. (0,0)
+			Fait faitSupplementaire = new Fait("0",acts);
+			ComparaisonSimple compSupp = new ComparaisonSimple("all","==","0");
+			Comparaison compEnPlus [] = {compSupp};
+			Condition condSupp = new Condition(compEnPlus);
+			regles.add(new Regle(faitSupplementaire, condSupp,7));
 
-			//On utilise la methode de la classe Regle pour obtenir les actions a effectuer
-			//List<Pair<Integer,List<Integer>>> actions = new ArrayList<Pair<Integer,List<Integer>>>();
+			//On utilise la methode de la classe Fait pour obtenir les actions a effectuer
+			for(ListIterator<Fait> iter = lesFaits.listIterator(); iter.hasNext();){
+				List<Pair<Integer,List<Double>>> actions = new ArrayList<Pair<Integer,List<Double>>>();
+				Fait f = iter.next();
+				actions = f.aEffectuer(regles);
+				//ajout des nouveaux faits obtenus a la liste de faits actuelle
+				for(Pair<Integer,List<Double>> action : actions){
+					Fait faitEnPlus = new Fait(String.valueOf(action.getKey()),action.getValue());
+					iter.add(faitEnPlus);
+				}
+			}
 			for(Fait f : lesFaits){
-				List<Pair<Integer,List<Integer>>> actions = new ArrayList<Pair<Integer,List<Integer>>>();
+				List<Pair<Integer,List<Double>>> actions = new ArrayList<Pair<Integer,List<Double>>>();
 				actions = f.aEffectuer(regles);
 				System.out.print(f.getName() + " :\n");
 				//Et on execute les actions
-				for(Pair<Integer,List<Integer>> p : actions){
+				for(Pair<Integer,List<Double>> p : actions){
 					//Détermination de la matière sujet des actions
 					int mat = p.getKey();
 					String matiere = new String();
@@ -144,9 +165,10 @@ public class Notes {
 					break;
 					}
 					//Affichage des commentaires
-					List<Integer> comList = p.getValue();
-					for(int com : comList){
-						switch(com){
+					List<Double> comList = p.getValue();
+					for(double com : comList){
+						//cast forcé puisqu'on ne switche que sur des int (sale !)
+						switch((int)com){
 						case 0 : System.out.print(matiere + " : Mettez-vous au travail !\n");
 						break;
 						case 1 : System.out.print(matiere + " : Travaillez plus !\n");
