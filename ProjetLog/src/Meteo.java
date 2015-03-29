@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
-
+//NE RENVOIE RIEN APRES INPUT DES DONNEES, A VOIR PLUS TARD
 public class Meteo {
 	
 	public static Vector<Regle> regles = new Vector<Regle>();
@@ -126,13 +126,13 @@ public class Meteo {
 				System.out.print("Entrez le jour en question : ");
 				//exception a ajouter
 				String nom = user_input.next();
-				double[] temps = new double[3];
+				List<Double> temps = new ArrayList<Double>();
 				System.out.print("La temperature moyenne (en degre Celsius): ");
-				temps[0] = Double.valueOf(user_input.next());
+				temps.add(Double.valueOf(user_input.next()));
 				System.out.print("Niveau de precipitation (en %): ");
-				temps[1] = Double.valueOf(user_input.next());
+				temps.add(Double.valueOf(user_input.next()));
 				System.out.print("Vitesse de vent (en km/h) : ");
-				temps[2] = Double.valueOf(user_input.next());
+				temps.add(Double.valueOf(user_input.next()));
 				lesFaits[j] = new Fait(nom, temps);
 				System.out.print("Le jour " + (j+1) + " est cree\n");
 			}
@@ -140,7 +140,6 @@ public class Meteo {
 			Condition[] cond = creationConditions();
 
 			//Pour enfin former les regles
-			//ici on les applique toutes a tous les faits donc une boucle suffit
 			for(int k=0; k<nb_jours; k++){
 				regles.add(new Regle(lesFaits[k], cond[0], 0));
 				regles.add(new Regle(lesFaits[k], cond[1], 1));
@@ -181,11 +180,11 @@ public class Meteo {
 			
 			//On utilise la methode de la classe Regle pour obtenir les actions a effectuer
 			for(Fait f : lesFaits){
-				List<Pair<Integer,List<Integer>>> actions = new ArrayList<Pair<Integer,List<Integer>>>();
+				List<Pair<Integer,List<Double>>> actions = new ArrayList<Pair<Integer,List<Double>>>();
 				actions = f.aEffectuer(regles);
 				System.out.print(f.getName() + " :\n");
 				//Et on execute les actions
-				for(Pair<Integer,List<Integer>> p : actions){
+				for(Pair<Integer,List<Double>> p : actions){
 
 					int mat = p.getKey();
 					String matiere = new String();
@@ -201,9 +200,9 @@ public class Meteo {
 					}
 
 					//Affichage des commentaires
-					List<Integer> comList = p.getValue();
-					for(int com : comList){
-					switch(com){
+					List<Double> comList = p.getValue();
+					for(double com : comList){
+					switch((int)com){
 					case 0 : System.out.println(matiere + " : Faibles chances d'averses et ciel calme. Attention au gel.");
 						break;
 					case 1 : System.out.println(" : De jolies brises par un temps sec et glacial.");
@@ -214,9 +213,9 @@ public class Meteo {
 						break;
 					case 4 : System.out.println(" : Temps glacial et calme, mais des averses en vue.");
 						break;
-					case 5 : System.out.println(" : La poussière est soulevée par le vent froid. Plusieurs averses.");
+					case 5 : System.out.println(" : La poussiere est soulevee par le vent froid. Plusieurs averses.");
 						break;
-					case 6 : System.out.println(" : Il sera pénible d'avancer en grelottant dans le vent et la pluie.");
+					case 6 : System.out.println(" : Il sera penible d'avancer en grelottant dans le vent et la pluie.");
 						break;
 					case 7 : System.out.println(" : Ouragan ! Temps glace ! Des averses ! O rage ! O desespoir...");
 						break;
@@ -230,7 +229,7 @@ public class Meteo {
 						break;
 					case 12 : System.out.println(" : Temps calme, paisible et frais, prevoyez juste un parapluie.");
 						break;
-					case 13 : System.out.println(" : Des brises fraîches, peut-etre accompagnee par une pluie plus ou moins grande.");
+					case 13 : System.out.println(" : Des brises fraiches, peut-etre accompagnee par une pluie plus ou moins grande.");
 						break;
 					case 14 : System.out.println(" : De petites branches mouillees peuvent vous tomber sur la tete et tremper votre chapeau.");
 						break;
@@ -250,7 +249,7 @@ public class Meteo {
 						break;
 					case 22 : System.out.println(" : Doux, humide, beaucoup de vent...il est preferable de bien prendre ses precautions en sortant.");
 						break;
-					case 23 : System.out.println(" : La température est agreable, mais ni l'ouragan ni les averses soutenues encouragent à sortir.");
+					case 23 : System.out.println(" : La temperature est agreable, mais ni l'ouragan ni les averses soutenues encouragent à sortir.");
 						break;
 					case 24 : System.out.println(" : Pas vraiment de risque de pluie ni de vent, un T-shirt peut etre amplement suffisant comme equipement.");
 						break;
