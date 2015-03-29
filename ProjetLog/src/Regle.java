@@ -35,10 +35,10 @@ public class Regle {
 		boolean[] b;
 		List<Pair<Integer,List<Integer>>> listeActions = new ArrayList<Pair<Integer,List<Integer>>>();	
 		for(Fait f : facts){
-			double[] data = f.getData();
+			List<Double> data = f.getData();
 			if(this.fact == f){
 				b = (this.premise.eval(f));
-				for(int i=0; i<data.length; i++){
+				for(int i=0; i<data.size(); i++){
 					List<Integer> lesActions = new ArrayList<Integer>();
 					Pair<Integer,List<Integer>> paireSujetActions = new Pair<Integer,List<Integer>>(i,lesActions);
 					if(b[i]){
@@ -47,6 +47,8 @@ public class Regle {
 						paireSujetActions.getValue().add(this.getAction());
 					}
 					listeActions.add(paireSujetActions);
+					//Fait faitSupplementaire = new Fait(String.valueOf(i),lesActions);
+					//facts.add(faitSupplementaire);
 				}
 			}
 		}
