@@ -9,14 +9,14 @@ import java.util.Vector;
 public class Fait {
 
 	private String name;
-	private double[] data;
+	private List<Double> data;
 
-	public Fait(String nom, double[] donnees){
+	public Fait(String nom, List<Double> donnees){
 		this.name = nom;
 		this.data = donnees;
 	}
 	
-	public double[] getData(){
+	public List<Double> getData(){
 		return this.data;
 	}
 	
@@ -24,24 +24,23 @@ public class Fait {
 		return this.name;
 	}
 	
-	public List<Pair<Integer,List<Integer>>> aEffectuer(Vector<Regle> rules){
+	public List<Pair<Integer,List<Double>>> aEffectuer(Vector<Regle> rules){
 		boolean[] b;
-		List<Pair<Integer,List<Integer>>> listeActions = new ArrayList<Pair<Integer,List<Integer>>>();
-		//List<Integer> lesActions = new ArrayList<Integer>();
+		List<Pair<Integer,List<Double>>> listeActions = new ArrayList<Pair<Integer,List<Double>>>();
 		for(Regle r : rules){
 			Fait fait = r.getFait();
 			if(fait == this){
 				b = (r.getCondition().eval(this));
-				//
-				for(int i=0; i<data.length; i++){
-					List<Integer> lesActions = new ArrayList<Integer>();
-					Pair<Integer,List<Integer>> paireSujetActions = new Pair<Integer,List<Integer>>(i,lesActions);
+				for(int i=0; i<data.size(); i++){
+					List<Double> lesActions = new ArrayList<Double>();
+					Pair<Integer,List<Double>> paireSujetActions = new Pair<Integer,List<Double>>(i,lesActions);
 					if(b[i]){
 						//i permet de retrouver a quoi s'applique l'action
 						//Si la condition s'applique, on ajoute l'action au vecteur d'actions du numéro i du fait
-						paireSujetActions.getValue().add(r.getAction());
+						//numero d'action en tant que double pour respecter les conventions de notation d'un fait
+						paireSujetActions.getValue().add((double)r.getAction());
 					}
-					//À la fin, on ajoute la paire(Sujet + actions associées) à la liste d'actions
+					//A la fin, on ajoute la paire(Sujet + actions associées) a la liste d'actions
 					listeActions.add(paireSujetActions);
 				}
 			}
