@@ -8,20 +8,38 @@ public class Regle {
 	private Condition premise;
 	private int action;
 
+	/** Constructeur
+	 * 
+	 * @param fait : le fait auquel s'applique la regle si son nom correspond
+	 * @param premisse : la condition a respecter pour que la regle s'applique
+	 * @param numAction : le numero de l'action a realiser si la regle s'applique
+	 */
 	public Regle(Fait fait, Condition premisse, int numAction){
 		this.fact = fait;
 		this.premise = premisse;
 		this.action = numAction;
 	}
 
+	/**
+	 * 
+	 * @return le fait auquel s'applique la regle
+	 */
 	public Fait getFait(){
 		return this.fact;
 	}
 
+	/**
+	 * 
+	 * @return la premisse de la regle
+	 */
 	public Condition getCondition(){
 		return this.premise;
 	}
 
+	/**
+	 * 
+	 * @return le numero de l'action a effectuer si la regle s'applique
+	 */
 	public int getAction(){
 		return this.action;
 	}
@@ -36,7 +54,7 @@ public class Regle {
 		List<Pair<Integer,List<Integer>>> listeActions = new ArrayList<Pair<Integer,List<Integer>>>();	
 		for(Fait f : facts){
 			List<Double> data = f.getData();
-			if(this.fact == f){
+			if(this.fact.getName() == f.getName()){
 				b = (this.premise.eval(f));
 				for(int i=0; i<data.size(); i++){
 					List<Integer> lesActions = new ArrayList<Integer>();

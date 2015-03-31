@@ -1,9 +1,5 @@
 import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.Hashtable;
 import java.util.List;
-//import java.util.Map;
-import java.util.Vector;
 
 
 public class Fait {
@@ -11,25 +7,43 @@ public class Fait {
 	private String name;
 	private List<Double> data;
 
+	/** Constructeur
+	 * 
+	 * @param nom : le nom du fait
+	 * @param donnees : les donnees associees
+	 */
 	public Fait(String nom, List<Double> donnees){
 		this.name = nom;
 		this.data = donnees;
 	}
 	
+	/** Pour obtenir la partie "donnees" d'un fait
+	 * 
+	 * @return les donnees du fait
+	 */
 	public List<Double> getData(){
 		return this.data;
 	}
 	
+	/**
+	 * 
+	 * @return le nom d'un fait
+	 */
 	public String getName(){
 		return this.name;
 	}
 	
-	public List<Pair<Integer,List<Double>>> aEffectuer(Vector<Regle> rules){
+	/** Methode pour etablir la liste des actions a effectuer
+	 * 
+	 * @param rules Liste des regles a appliquer (si possible) aux faits 
+	 * @return la liste des actions a effectuer (sous forme de numeros)
+	 */
+	public List<Pair<Integer,List<Double>>> aEffectuer(List<Regle> rules){
 		boolean[] b;
 		List<Pair<Integer,List<Double>>> listeActions = new ArrayList<Pair<Integer,List<Double>>>();
 		for(Regle r : rules){
 			Fait fait = r.getFait();
-			if(fait == this){
+			if(fait.getName() == this.getName()){
 				b = (r.getCondition().eval(this));
 				for(int i=0; i<data.size(); i++){
 					List<Double> lesActions = new ArrayList<Double>();

@@ -1,17 +1,19 @@
 import java.util.List;
 
 
-public class Condition {
+public class ConditionPrb extends Condition{
 
-	Comparaison[] comparaisons;
-
-	/** Constructeur
-	 * 
-	 * @param compa : l'ensemble des comparaisons a realiser pour verifier la condition
-	 */
-	public Condition(Comparaison[] compa){
-		this.comparaisons = compa;
+	//remplacer par un vecteur
+	//Comparaison[] comparaisons;
+	
+	public ConditionPrb(Comparaison[] compa){
+		super(compa);
 	}
+
+	//creer un nouveau
+	//public ConditionPrb(Comparaison[] compa){
+		//this.comparaisons = compa;
+	//}
 
 	//ajouter methode pour ajouter comparaison au vecteur comparaisons
 
@@ -20,7 +22,7 @@ public class Condition {
 	 * @return la veracite de la comparaison
 	 */
 	public boolean[] evalComp(Comparaison c, Fait f){
-		Class<? extends Comparaison> classe = c.getClass();
+		Class classe = c.getClass();
 		boolean[] bool = (classe.equals(ComparaisonSimple.class) ? evalCompSimple(c,f) : evalCompDouble(c,f));
 		return bool;
 	}
@@ -32,7 +34,12 @@ public class Condition {
 	public boolean[] evalCompSimple(Comparaison c, Fait f){
 		List<Double> data = f.getData();
 		boolean bool [] = new boolean[data.size()];
-		//Si la comparaison s'applique ˆ toutes les donnŽes
+		for(boolean b : bool){
+			b = true;
+		}
+		System.out.print(c.getElement(0) + c.getElement(1) + c.getElement(2) + "\n");
+		//System.out.print(c.getElement(0));
+		//Si la comparaison s'applique ï¿½ toutes les donnï¿½es
 		if(c.getElement(0) == "all"){
 			for(int i=0; i<data.size(); i++){
 				double a = data.get(i);
@@ -41,18 +48,24 @@ public class Condition {
 			}
 			c.setArg(0, "all");
 		}
-		//Sinon ne pas faire de for, Žvaluer seulement pour numŽro concernŽ
+		//Sinon ne pas faire de for, ï¿½valuer seulement pour numï¿½ro concernï¿½
 		else{
-			int i = Integer.valueOf(c.getElement(0));
-			double a = data.get(i);
-			//memoriser l'ancien argument
-			String tmp = c.getElement(0);
-			//mettre son remplacement
-			c.setArg(0,String.valueOf(a));
-			bool[i] = c.eval();
-			//remettre l'ancien numero
-			c.setArg(0,tmp);
+//			String temp = c.getElement(0);
+//			int i = Integer.valueOf(c.getElement(0));
+//			double a = data[i];
+//			c.setArg(0,String.valueOf(a));
+//			bool[i] = c.eval();
+//			c.setArg(0, temp);
+			//String temp = c.getElement(0);
+			
+			for(int i=0; i<data.size(); i++){
+				double a = data.get(i);
+				c.setArg(0,String.valueOf(a));
+				bool[i] = c.eval();}
+			//c.setArg(0, temp);
+			
 		}
+		
 		return bool;
 	}
 
@@ -67,8 +80,9 @@ public class Condition {
 	public boolean[] evalCompDouble(Comparaison c, Fait f){
 		List<Double> data = f.getData();
 		boolean bool [] = new boolean[data.size()];
-		String tmp = c.getElement(0);
-		String tmp2 = c.getElement(2);
+		for(boolean b : bool){
+			b = true;
+		}
 		int i = Integer.valueOf(c.getElement(0));
 		int j = Integer.valueOf(c.getElement(2));
 		double arg1 = data.get(i);
@@ -76,8 +90,6 @@ public class Condition {
 		c.setArg(0,String.valueOf(arg1));
 		c.setArg(2, String.valueOf(arg2));
 		bool[i] = c.eval();
-		c.setArg(0, tmp);
-		c.setArg(2, tmp2);
 		return bool;
 	}
 
