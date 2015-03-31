@@ -1,20 +1,21 @@
+//Ne fonctionne pas. Probleme d'ecriture des conditions (pas de sens par rapport a la forme des donnees)
+
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
-//NE RENVOIE RIEN APRES INPUT DES DONNEES, A VOIR PLUS TARD
+
 public class Meteo {
 	
 	public static Vector<Regle> regles = new Vector<Regle>();
 	
-	public static Condition[] creationConditions(){
+	public static ConditionPrb[] creationConditions(){
 		
-		Condition[] cond = new Condition[32];
+		ConditionPrb[] cond = new ConditionPrb[32];
 		
 		//Les comparaisons...
+		//Comparaisons sur les températures
 		ComparaisonSimple compn1530 = new ComparaisonSimple("0",">=","-15");
 		ComparaisonSimple comp0000 = new ComparaisonSimple("0","<","0");
 		ComparaisonSimple comp0030 = new ComparaisonSimple("0",">=","0");
@@ -24,11 +25,13 @@ public class Meteo {
 		ComparaisonSimple comp2030 = new ComparaisonSimple("0",">=","20");
 		ComparaisonSimple comp3020 = new ComparaisonSimple("0","<=","30");
 		
+		//Comparaisons sur le niveau de précipitations
 		ComparaisonSimple comp0031 = new ComparaisonSimple("1",">=","0");
 		ComparaisonSimple comp4001 = new ComparaisonSimple("1","<","40");
 		ComparaisonSimple comp4031 = new ComparaisonSimple("1",">=","40");
 		ComparaisonSimple comp10021 = new ComparaisonSimple("1","<=","100");
 		
+		//Comparaisons sur la vitesse du vent
 		ComparaisonSimple comp0032 = new ComparaisonSimple("2",">=","0");
 		ComparaisonSimple comp0202 = new ComparaisonSimple("2","<","2");
 		ComparaisonSimple comp0232 = new ComparaisonSimple("2",">=","2");
@@ -39,75 +42,75 @@ public class Meteo {
 		
 		//...que l'on combine dans les conditions
 		Comparaison compa00 [] = {compn1530, comp0000, comp0031, comp4001, comp0032, comp0202};
-		cond[0] = new Condition(compa00);
+		cond[0] = new ConditionPrb(compa00);
 		Comparaison compa01 [] = {compn1530, comp0000, comp0031, comp4001, comp0232, comp3002};
-		cond[1] = new Condition(compa01);
+		cond[1] = new ConditionPrb(compa01);
 		Comparaison compa02 [] = {compn1530, comp0000, comp0031, comp4001, comp3032, comp7502};
-		cond[2] = new Condition(compa02);
+		cond[2] = new ConditionPrb(compa02);
 		Comparaison compa03 [] = {compn1530, comp0000, comp0031, comp4001, comp7532};
-		cond[3] = new Condition(compa03);
+		cond[3] = new ConditionPrb(compa03);
 		Comparaison compa04 [] = {compn1530, comp0000, comp4031, comp10021, comp0032, comp0202};
-		cond[4] = new Condition(compa04);
+		cond[4] = new ConditionPrb(compa04);
 		Comparaison compa05 [] = {compn1530, comp0000, comp4031, comp10021, comp0232, comp3002};
-		cond[5] = new Condition(compa05);
+		cond[5] = new ConditionPrb(compa05);
 		Comparaison compa06 [] = {compn1530, comp0000, comp4031, comp10021,  comp3032, comp7502};
-		cond[6] = new Condition(compa06);
+		cond[6] = new ConditionPrb(compa06);
 		Comparaison compa07 [] = {compn1530, comp0000, comp4031, comp10021, comp7532};
-		cond[7] = new Condition(compa07);
+		cond[7] = new ConditionPrb(compa07);
 
 		Comparaison compa08 [] = {comp0030, comp1000, comp0031, comp4001, comp0032, comp0202};
-		cond[8] = new Condition(compa08);
+		cond[8] = new ConditionPrb(compa08);
 		Comparaison compa09 [] = {comp0030, comp1000, comp0031, comp4001, comp0232, comp3002};
-		cond[9] = new Condition(compa09);
+		cond[9] = new ConditionPrb(compa09);
 		Comparaison compa10 [] = {comp0030, comp1000, comp0031, comp4001, comp3032, comp7502};
-		cond[10] = new Condition(compa10);
+		cond[10] = new ConditionPrb(compa10);
 		Comparaison compa11 [] = {comp0030, comp1000, comp0031, comp4001, comp7532};
-		cond[11] = new Condition(compa11);
+		cond[11] = new ConditionPrb(compa11);
 		Comparaison compa12 [] = {comp0030, comp1000, comp4031, comp10021, comp0032, comp0202};
-		cond[12] = new Condition(compa12);
+		cond[12] = new ConditionPrb(compa12);
 		Comparaison compa13 [] = {comp0030, comp1000, comp4031, comp10021, comp0232, comp3002};
-		cond[13] = new Condition(compa13);
+		cond[13] = new ConditionPrb(compa13);
 		Comparaison compa14 [] = {comp0030, comp1000, comp4031, comp10021,  comp3032, comp7502};
-		cond[14] = new Condition(compa14);
+		cond[14] = new ConditionPrb(compa14);
 		Comparaison compa15 [] = {comp0030, comp1000, comp4031, comp10021, comp7532};
-		cond[15] = new Condition(compa15);
+		cond[15] = new ConditionPrb(compa15);
 
 		Comparaison compa16 [] = {comp1030, comp2000, comp0031, comp4001, comp0032, comp0202};
-		cond[16] = new Condition(compa16);
+		cond[16] = new ConditionPrb(compa16);
 		Comparaison compa17 [] = {comp1030, comp2000, comp0031, comp4001, comp0232, comp3002};
-		cond[17] = new Condition(compa17);
+		cond[17] = new ConditionPrb(compa17);
 		Comparaison compa18 [] = {comp1030, comp2000, comp0031, comp4001, comp3032, comp7502};
-		cond[18] = new Condition(compa18);
+		cond[18] = new ConditionPrb(compa18);
 		Comparaison compa19 [] = {comp1030, comp2000, comp0031, comp4001, comp7532};
-		cond[19] = new Condition(compa19);
+		cond[19] = new ConditionPrb(compa19);
 		Comparaison compa20 [] = {comp1030, comp2000, comp4031, comp10021, comp0032, comp0202};
-		cond[20] = new Condition(compa20);
+		cond[20] = new ConditionPrb(compa20);
 		Comparaison compa21 [] = {comp1030, comp2000, comp4031, comp10021, comp0232, comp3002};
-		cond[21] = new Condition(compa21);
+		cond[21] = new ConditionPrb(compa21);
 		Comparaison compa22 [] = {comp1030, comp2000, comp4031, comp10021,  comp3032, comp7502};
-		cond[22] = new Condition(compa22);
+		cond[22] = new ConditionPrb(compa22);
 		Comparaison compa23 [] = {comp1030, comp2000, comp4031, comp10021, comp7532};
-		cond[23] = new Condition(compa23);
+		cond[23] = new ConditionPrb(compa23);
 
 		Comparaison compa24 [] = {comp2030, comp3020, comp0031, comp4001, comp0032, comp0202};
-		cond[24] = new Condition(compa24);
+		cond[24] = new ConditionPrb(compa24);
 		Comparaison compa25 [] = {comp2030, comp3020, comp0031, comp4001, comp0232, comp3002};
-		cond[25] = new Condition(compa25);
+		cond[25] = new ConditionPrb(compa25);
 		Comparaison compa26 [] = {comp2030, comp3020, comp0031, comp4001, comp3032, comp7502};
-		cond[26] = new Condition(compa26);
+		cond[26] = new ConditionPrb(compa26);
 		Comparaison compa27 [] = {comp2030, comp3020, comp0031, comp4001, comp7532};
-		cond[27] = new Condition(compa27);
+		cond[27] = new ConditionPrb(compa27);
 		Comparaison compa28 [] = {comp2030, comp3020, comp4031, comp10021, comp0032, comp0202};
-		cond[28] = new Condition(compa28);
+		cond[28] = new ConditionPrb(compa28);
 		Comparaison compa29 [] = {comp2030, comp3020, comp4031, comp10021, comp0232, comp3002};
-		cond[29] = new Condition(compa29);
+		cond[29] = new ConditionPrb(compa29);
 		Comparaison compa30 [] = {comp2030, comp3020, comp4031, comp10021,  comp3032, comp7502};
-		cond[30] = new Condition(compa30);
+		cond[30] = new ConditionPrb(compa30);
 		Comparaison compa31 [] = {comp2030, comp3020, comp4031, comp10021, comp7532};
-		cond[31] = new Condition(compa31);
+		cond[31] = new ConditionPrb(compa31);
 
 		//ComparaisonDouble compaTest [] = {compTest};
-		//Condition condTest = new Condition(compaTest);
+		//ConditionPrb condTest = new ConditionPrb(compaTest);
 		
 		return cond;
 		
@@ -124,20 +127,20 @@ public class Meteo {
 			Fait[] lesFaits = new Fait[nb_jours];
 			for(int j = 0; j < nb_jours; j++){
 				System.out.print("Entrez le jour en question : ");
-				//exception a ajouter
 				String nom = user_input.next();
 				List<Double> temps = new ArrayList<Double>();
-				System.out.print("La temperature moyenne (en degre Celsius): ");
+				System.out.print("La temperature moyenne (en degres Celsius): ");
 				temps.add(Double.valueOf(user_input.next()));
-				System.out.print("Niveau de precipitation (en %): ");
+				System.out.print("Niveau des precipitations (en %): ");
 				temps.add(Double.valueOf(user_input.next()));
-				System.out.print("Vitesse de vent (en km/h) : ");
+				System.out.print("Vitesse du vent (en km/h) : ");
 				temps.add(Double.valueOf(user_input.next()));
 				lesFaits[j] = new Fait(nom, temps);
-				System.out.print("Le jour " + (j+1) + " est cree\n");
+				System.out.print("Le jour " + nom + " est cree\n");
 			}
 			
-			Condition[] cond = creationConditions();
+			ConditionPrb[] cond = creationConditions();
+			
 
 			//Pour enfin former les regles
 			for(int k=0; k<nb_jours; k++){
@@ -186,7 +189,7 @@ public class Meteo {
 				//Et on execute les actions
 				for(Pair<Integer,List<Double>> p : actions){
 
-					int mat = p.getKey();
+					/*int mat = p.getKey();
 					String matiere = new String();
 					switch(mat){
 					case 0 : matiere = "Le temps";
@@ -197,17 +200,17 @@ public class Meteo {
 					break;
 					default : matiere = "Pipo";
 					break;
-					}
+					}*/
 
 					//Affichage des commentaires
 					List<Double> comList = p.getValue();
 					for(double com : comList){
 					switch((int)com){
-					case 0 : System.out.println(matiere + " : Faibles chances d'averses et ciel calme. Attention au gel.");
+					case 0 : System.out.println(" : Faibles chances d'averses et ciel calme. Attention au gel.");
 						break;
 					case 1 : System.out.println(" : De jolies brises par un temps sec et glacial.");
 						break;
-					case 2 : System.out.println(" : Attention aux coups de vent glaciaux, combines √† des possibilites d'averses isolees.");
+					case 2 : System.out.println(" : Attention aux coups de vent glacés, combines a des possibilites d'averses isolees.");
 						break;
 					case 3 : System.out.println(" : Temps glacial. Peu de chance d'averses mais un vent d'ouragan ! Ne pas sortir.");
 						break;

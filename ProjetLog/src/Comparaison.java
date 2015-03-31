@@ -19,11 +19,19 @@ public class Comparaison {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param i : indice de l'element a renvoyer
+	 * @return l'element correspondant a l'indice demande (0 : (indice du) premier argument, 1 : operande, 2 : (indice du) deuxieme argument) 
+	 */
 	public String getElement(int i){
 		return this.comp[i];
 	}
 	
+	/** Methode pour evaluer une comparaison
+	 * 
+	 * @return la veracite de la comparaison
+	 */
 	public boolean eval(){
 		boolean bool;
 		double a = Double.valueOf(this.comp[0]);

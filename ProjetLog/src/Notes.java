@@ -1,14 +1,8 @@
+//Prend le nom d'un eleve (ou plusieurs) et ses notes dans differentes matieres. Renvoie une appreciation par matiere.
+
 import java.util.ArrayList;
-//import java.util.Iterator;
-//import java.util.Enumeration;
-//import java.util.HashMap;
-//import java.util.Hashtable;
-//import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-//import java.util.Map;
 import java.util.Scanner;
-//import java.util.Set;
 import java.util.Vector;
 
 
@@ -112,27 +106,7 @@ public class Notes {
 				//regles.add(new Regle(lesFaits[k], condTest, 7));
 			}
 			
-			//Regle supplementaire qui ne s'appliquera que sur un nouveau fait de la liste
-			List<Double> acts = new ArrayList<Double>();
-			acts.add(0.0);
-			//Le fait, c'est maths + mettez-vous au travail, i.e. (0,0)
-			Fait faitSupplementaire = new Fait("0",acts);
-			ComparaisonSimple compSupp = new ComparaisonSimple("all","==","0");
-			Comparaison compEnPlus [] = {compSupp};
-			Condition condSupp = new Condition(compEnPlus);
-			regles.add(new Regle(faitSupplementaire, condSupp,7));
-
-			//On utilise la methode de la classe Fait pour obtenir les actions a effectuer
-			for(ListIterator<Fait> iter = lesFaits.listIterator(); iter.hasNext();){
-				List<Pair<Integer,List<Double>>> actions = new ArrayList<Pair<Integer,List<Double>>>();
-				Fait f = iter.next();
-				actions = f.aEffectuer(regles);
-				//ajout des nouveaux faits obtenus a la liste de faits actuelle
-				for(Pair<Integer,List<Double>> action : actions){
-					Fait faitEnPlus = new Fait(String.valueOf(action.getKey()),action.getValue());
-					iter.add(faitEnPlus);
-				}
-			}
+			
 			for(Fait f : lesFaits){
 				List<Pair<Integer,List<Double>>> actions = new ArrayList<Pair<Integer,List<Double>>>();
 				actions = f.aEffectuer(regles);
@@ -167,7 +141,7 @@ public class Notes {
 					//Affichage des commentaires
 					List<Double> comList = p.getValue();
 					for(double com : comList){
-						//cast forcé puisqu'on ne switche que sur des int (sale !)
+						//cast forcé puisqu'on ne switche que sur des int
 						switch((int)com){
 						case 0 : System.out.print(matiere + " : Mettez-vous au travail !\n");
 						break;
