@@ -1,4 +1,6 @@
-
+//CLasse non utilisée dans le programme final (comme son nom l'indique, elle pose différents problèmes)
+//La classe ConditionPrb peut être utilisée pour vérifier le fonctionnement (défectueux) de Meteo
+//Ici, problème notamment de correspondance entre le nom de la classe et le nom du fichier
 public class Condition {
 
 	//remplacer par un vecteur
